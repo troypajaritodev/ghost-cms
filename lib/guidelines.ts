@@ -45,3 +45,70 @@ export const parkRules: ParkRule[] = [
     note: "Research collection requires a permit from the park office.",
   },
 ];
+
+export type ZoneTone = "core" | "use" | "buffer";
+
+export type Zone = {
+  id: string;
+  tone: ZoneTone;
+  name: string;
+  access: string;
+  summary: string;
+  allowed: string[];
+  restricted: string[];
+  /** Relative width of the zone in the legend bar. */
+  share: string;
+};
+
+/** Lake zoning system (PRD Module 3 / FR-3.2). */
+export const lakeZones: Zone[] = [
+  {
+    id: "strict",
+    tone: "core",
+    name: "Strict protection zone",
+    access: "Closed to tourism",
+    summary:
+      "Core breeding and spawning grounds — the nesting islands, the marsh edges and the deepest basin of the lake.",
+    allowed: ["Ranger patrols", "Monitoring with a park permit"],
+    restricted: ["All boat entry", "Fishing of any kind", "Drone flights"],
+    share: "22%",
+  },
+  {
+    id: "sustainable",
+    tone: "use",
+    name: "Sustainable use zone",
+    access: "Regulated access",
+    summary:
+      "The open water where guided tours run, with designated photography points and controlled angling.",
+    allowed: [
+      "Guided boat tours",
+      "Birdwatching from marked points",
+      "Handline and rod-and-reel angling",
+    ],
+    restricted: [
+      "Nets, traps and electrofishing",
+      "Beaching on islands",
+      "Unaccompanied boat hire",
+    ],
+    share: "40%",
+  },
+  {
+    id: "buffer",
+    tone: "buffer",
+    name: "Buffer zone",
+    access: "Controlled access",
+    summary:
+      "The shoreline and lakeside communities, where entry is managed together with the barangay and the park office.",
+    allowed: [
+      "Community homestays",
+      "Marked jetties and access points",
+      "Registered small-scale fishing",
+    ],
+    restricted: [
+      "New permanent structures",
+      "Waste discharge",
+      "Clearing of shoreline vegetation",
+    ],
+    share: "38%",
+  },
+];

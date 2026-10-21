@@ -8,6 +8,7 @@ import {
   Trash2,
 } from "lucide-react";
 import SectionHeading from "@/components/section-heading";
+import ZoningSection from "@/components/guidelines/zoning-section";
 import { parkRules, type ParkRule } from "@/lib/guidelines";
 import { site } from "@/lib/site";
 
@@ -115,6 +116,8 @@ export default function GuidelinesPage() {
           </p>
         </div>
       </section>
+
+      <ZoningSection />
     </>
   );
 }
