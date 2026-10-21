@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Compass, Waves } from "lucide-react";
+import AdvisoryPreview from "@/components/home/advisory-preview";
+import ExploreCards from "@/components/home/explore-cards";
+import LakeOverview from "@/components/home/lake-overview";
+import VisitCta from "@/components/home/visit-cta";
 import { heroStats, site } from "@/lib/site";
 
 const structuredData = {
@@ -132,6 +136,11 @@ export default function HomePage() {
           </dl>
         </div>
       </section>
+
+      <LakeOverview />
+      <ExploreCards />
+      <AdvisoryPreview />
+      <VisitCta />
     </>
   );
 }

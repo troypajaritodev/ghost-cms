@@ -60,6 +60,13 @@
   --color-reed-800: #723e19;
   --color-reed-900: #613418;
 
+  /* Advisory severity: CRITICAL only, kept out of the nature palette on purpose. */
+  --color-alert-50: #fdf3f2;
+  --color-alert-100: #fadfdb;
+  --color-alert-500: #d1392c;
+  --color-alert-600: #b3261e;
+  --color-alert-700: #8f1d17;
+
   --animate-rise: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 1.4s ease-out both;
 
