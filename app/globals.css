@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Naujan Lake Visitor Hub — design tokens
+  Palette: lake (deep teal), moss (wetland green), reed (amber accent),
+  sand (warm paper neutrals), ink (near-black green).
+*/
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
+    serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-sand-50: #fbfaf6;
+  --color-sand-100: #f5f2ea;
+  --color-sand-200: #eae4d6;
+  --color-sand-300: #d8ceba;
+  --color-sand-400: #c0b197;
+  --color-sand-500: #a89478;
+  --color-sand-600: #8d7a61;
+  --color-sand-700: #6f5f4c;
+  --color-sand-800: #574a3c;
+  --color-sand-900: #3f362b;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-ink: #0c1a17;
+  --color-ink-soft: #384744;
+
+  --color-lake-50: #eff7f6;
+  --color-lake-100: #d6ebe9;
+  --color-lake-200: #aed9d6;
+  --color-lake-300: #7ec0bd;
+  --color-lake-400: #4fa3a1;
+  --color-lake-500: #338785;
+  --color-lake-600: #276c6b;
+  --color-lake-700: #205757;
+  --color-lake-800: #1a4545;
+  --color-lake-900: #123433;
+  --color-lake-950: #08211f;
+
+  --color-moss-50: #f1f8ee;
+  --color-moss-100: #dcefd6;
+  --color-moss-200: #bce0b1;
+  --color-moss-300: #92c884;
+  --color-moss-400: #68ab58;
+  --color-moss-500: #4a8e3c;
+  --color-moss-600: #35722c;
+  --color-moss-700: #2b5825;
+  --color-moss-800: #254721;
+  --color-moss-900: #1e3a1c;
+
+  --color-reed-50: #fdf8ec;
+  --color-reed-100: #f8ecc9;
+  --color-reed-200: #f0d792;
+  --color-reed-300: #e7bd57;
+  --color-reed-400: #dda32f;
+  --color-reed-500: #c98420;
+  --color-reed-600: #ab6519;
+  --color-reed-700: #894b17;
+  --color-reed-800: #723e19;
+  --color-reed-900: #613418;
+
+  /* Advisory severity: CRITICAL only, kept out of the nature palette on purpose. */
+  --color-alert-50: #fdf3f2;
+  --color-alert-100: #fadfdb;
+  --color-alert-500: #d1392c;
+  --color-alert-600: #b3261e;
+  --color-alert-700: #8f1d17;
+
+  --animate-rise: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 1.4s ease-out both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-lake-800);
+    color: var(--color-sand-50);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lake-600);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Fine film grain used over photography to keep large images from banding. */
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
