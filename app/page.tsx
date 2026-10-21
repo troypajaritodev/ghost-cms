@@ -1,69 +1,137 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Compass, Waves } from "lucide-react";
+import { heroStats, site } from "@/lib/site";
 
-export default function Home() {
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  name: "Naujan Lake National Park",
+  description: site.description,
+  touristType: ["Eco-tourists", "Birdwatchers", "Researchers"],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Naujan",
+    addressRegion: "Oriental Mindoro",
+    addressCountry: "PH",
+  },
+  isAccessibleForFree: false,
+  publicAccess: true,
+};
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-lake-950">
         <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/images/hero-lake.jpg"
+          alt="Open water of Naujan Lake beneath a wide sky, with the mountains of Mindoro on the horizon"
+          fill
           priority
+          sizes="100vw"
+          className="-z-10 scale-[1.02] object-cover object-center"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-lake-950/85 via-lake-950/25 to-lake-950/95"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-lake-950/85 via-lake-950/25 to-transparent"
+        />
+        <div aria-hidden="true" className="grain-overlay absolute inset-0 -z-10" />
+
+        <div className="relative flex flex-1 items-end px-5 pt-32 pb-12 sm:px-8 lg:px-12 lg:pb-16">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-4xl">
+              <p
+                className="animate-rise flex items-center gap-3 text-[11px] font-medium tracking-[0.22em] text-sand-100/75 uppercase"
+                style={{ animationDelay: "80ms" }}
+              >
+                <span aria-hidden="true" className="h-px w-8 bg-reed-300/70" />
+                {site.park} · {site.region}
+              </p>
+
+              <h1
+                className="animate-rise mt-6 font-display text-[clamp(2.45rem,6.6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.025em] text-sand-50"
+                style={{ animationDelay: "180ms" }}
+              >
+                The lake the birds
+                <br />
+                <span className="text-reed-200 italic">come home to.</span>
+              </h1>
+
+              <p
+                className="animate-rise mt-7 max-w-[46ch] text-[15.5px] leading-[1.7] text-sand-100/80"
+                style={{ animationDelay: "320ms" }}
+              >
+                The fifth largest lake in the Philippines and a Ramsar Wetland
+                of International Importance — 8,125 hectares of open water,
+                marshland and river mouth where migratory waterbirds return
+                every October, and where a national park has stayed whole.
+              </p>
+
+              <div
+                className="animate-rise mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+                style={{ animationDelay: "440ms" }}
+              >
+                <Link
+                  href="/inquire"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-sand-50 px-6 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-lake-950/30 transition-colors duration-300 hover:bg-white"
+                >
+                  <Compass className="size-4" strokeWidth={2} />
+                  Plan your visit
+                  <ArrowRight
+                    className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                    strokeWidth={2}
+                  />
+                </Link>
+                <Link
+                  href="/wildlife"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 px-6 py-3.5 text-sm font-medium text-sand-50 backdrop-blur-sm transition-colors duration-300 hover:border-white/50 hover:bg-white/10"
+                >
+                  <Waves className="size-4" strokeWidth={1.8} />
+                  Explore the wildlife
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="relative border-t border-white/15 bg-lake-950/35 backdrop-blur-md">
+          <dl className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-y-7 px-5 py-7 sm:px-8 md:grid-cols-4 lg:px-12">
+            {heroStats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`animate-fade-in ${
+                  index > 0 ? "md:border-l md:border-white/10 md:pl-7" : ""
+                }`}
+                style={{ animationDelay: `${600 + index * 90}ms` }}
+              >
+                <dt className="sr-only">{stat.label}</dt>
+                <dd>
+                  <span className="font-display text-[26px] leading-none font-light text-sand-50">
+                    {stat.value}
+                  </span>
+                  {stat.unit ? (
+                    <span className="ml-1 font-mono text-[11px] tracking-wider text-sand-300/70">
+                      {stat.unit}
+                    </span>
+                  ) : null}
+                  <span className="mt-2.5 block text-[10px] font-medium tracking-[0.16em] text-sand-200/65 uppercase">
+                    {stat.label}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
